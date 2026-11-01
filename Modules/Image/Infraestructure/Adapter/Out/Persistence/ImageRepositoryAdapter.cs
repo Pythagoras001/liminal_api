@@ -6,12 +6,11 @@ using liminal_api.Shared.Infrastructure.Persistence;
 
 namespace liminal_api.Modules.Image.Infraestructure.Adapter.Out.Persistence
 {
-    public class ImageRepository : IImageRepositoryPort
+    public class ImageRepositoryAdapter : IImageRepositoryPort
     {
-
         private readonly AppDbContext _db;
 
-        public ImageRepository(AppDbContext db)
+        public ImageRepositoryAdapter(AppDbContext db)
         {
             _db = db;
         }

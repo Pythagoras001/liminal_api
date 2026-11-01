@@ -4,9 +4,12 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>2991e5d5-b921-493c-a94f-54591b66363e</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.2.0" />
+    <PackageReference Include="CloudinaryDotNet" Version="1.29.3" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.14">
       <PrivateAssets>all</PrivateAssets>
@@ -22,8 +25,7 @@
 
   <ItemGroup>
     <Folder Include="Modules\Image\Infraestructure\Adapter\In\" />
-    <Folder Include="Modules\User\Application\" />
-    <Folder Include="Modules\User\Infraestructure\" />
+    <Folder Include="Modules\User\Infraestructure\Adapter\Out\Persistence\Configuration\" />
   </ItemGroup>
 
 </Project>

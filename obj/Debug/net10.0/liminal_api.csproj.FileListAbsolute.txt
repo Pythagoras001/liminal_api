@@ -146,3 +146,4 @@ C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\obj\Debug\n
 C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\obj\Debug\net10.0\liminal_api.pdb
 C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\obj\Debug\net10.0\liminal_api.genruntimeconfig.cache
 C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\obj\Debug\net10.0\ref\liminal_api.dll
+C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\obj\Debug\net10.0\liminal_api.sourcelink.json
