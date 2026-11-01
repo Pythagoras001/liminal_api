@@ -1,0 +1,6 @@
+@liminal_api_HostAddress = http://localhost:5276
+
+GET {{liminal_api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
