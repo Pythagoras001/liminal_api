@@ -44,7 +44,20 @@ namespace liminal_api.Modules.User.Infraestructure.Adapter.In.Rest
             {
                 var command = new RegisterUserCommand(request.userName, request.email, request.password);
                 var userRegister = await _registerUserUseCase.registerUserUseCase(command);
-                return Ok();
+
+                return Ok(new UserRegisterResponseDto
+                {
+                    id = userRegister.Id.ToString(),
+                    userName = userRegister.UserName ?? string.Empty,
+                    email = userRegister.Email ?? string.Empty,
+                    createdAt = userRegister.CreatedAt,
+                    profileImage = userRegister.ImgProfile == null ? null : new UserRegisterResponseDto.ProfileImageResponseDto
+                    {
+                        thumbnailUrl = userRegister.ImgProfile.ThumbnailUrl ?? string.Empty,
+                        mediumUrl = userRegister.ImgProfile.MediumUrl ?? string.Empty,
+                        originalUrl = userRegister.ImgProfile.OriginalUrl ?? string.Empty
+                    }
+                });
             }
             catch (ArgumentException)
             {
