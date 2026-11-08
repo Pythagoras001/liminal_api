@@ -14,12 +14,14 @@ namespace liminal_api.Modules.User.Infraestructure.Adapter.In.Rest
     {
         private readonly ILoginUserUseCase _loginUserUseCase;
         private readonly IRegisterUserUseCase _registerUserUseCase;
+        private readonly IUpdateUserUseCase _updateUserUseCase;
         private readonly UserService _userService;
 
-        public UserController(ILoginUserUseCase loginUserUseCase, IRegisterUserUseCase registerUserUseCase, UserService userService)
+        public UserController(ILoginUserUseCase loginUserUseCase, IRegisterUserUseCase registerUserUseCase, IUpdateUserUseCase updateUserUseCase, UserService userService)
         {
             _loginUserUseCase = loginUserUseCase;
             _registerUserUseCase = registerUserUseCase;
+            _updateUserUseCase = updateUserUseCase;
             _userService = userService;
         }
 
@@ -82,20 +84,7 @@ namespace liminal_api.Modules.User.Infraestructure.Adapter.In.Rest
             try
             {
                 var userRegister = await _userService.findUser(userIdClaim);
-
-                return Ok(new UserRegisterResponseDto
-                {
-                    id = userRegister.Id.ToString(),
-                    userName = userRegister.UserName ?? string.Empty,
-                    email = userRegister.Email ?? string.Empty,
-                    createdAt = userRegister.CreatedAt,
-                    profileImage = userRegister.ImgProfile == null ? null : new UserRegisterResponseDto.ProfileImageResponseDto
-                    {
-                        thumbnailUrl = userRegister.ImgProfile.ThumbnailUrl ?? string.Empty,
-                        mediumUrl = userRegister.ImgProfile.MediumUrl ?? string.Empty,
-                        originalUrl = userRegister.ImgProfile.OriginalUrl ?? string.Empty
-                    }
-                });
+                return Ok(MapToResponse(userRegister));
             }
             catch (ArgumentException)
             {
@@ -105,6 +94,63 @@ namespace liminal_api.Modules.User.Infraestructure.Adapter.In.Rest
             {
                 return NotFound(new { message = "User not found." });
             }
+        }
+
+        [Authorize]
+        [HttpPut("me")]
+        public async Task<IActionResult> updateCurrentUser([FromForm] UpdateUserRequestDto request)
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrWhiteSpace(userIdClaim))
+            {
+                return Unauthorized(new { message = "User not authenticated." });
+            }
+
+            try
+            {
+                var userId = long.Parse(userIdClaim);
+                using var imageStream = request.imgProfile != null ? request.imgProfile.OpenReadStream() : null;
+
+                var command = new UpdateUserCommand(
+                    userId,
+                    request.userName,
+                    request.email,
+                    imageStream
+                );
+
+                var userRegister = await _updateUserUseCase.updateUserUseCase(command);
+                return Ok(MapToResponse(userRegister));
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (FormatException)
+            {
+                return BadRequest(new { message = "Invalid user id." });
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound(new { message = "User not found." });
+            }
+        }
+
+        private static UserRegisterResponseDto MapToResponse(liminal_api.Modules.User.Domain.UserRegister userRegister)
+        {
+            return new UserRegisterResponseDto
+            {
+                id = userRegister.Id.ToString(),
+                userName = userRegister.UserName ?? string.Empty,
+                email = userRegister.Email ?? string.Empty,
+                createdAt = userRegister.CreatedAt,
+                profileImage = userRegister.ImgProfile == null ? null : new UserRegisterResponseDto.ProfileImageResponseDto
+                {
+                    thumbnailUrl = userRegister.ImgProfile.ThumbnailUrl ?? string.Empty,
+                    mediumUrl = userRegister.ImgProfile.MediumUrl ?? string.Empty,
+                    originalUrl = userRegister.ImgProfile.OriginalUrl ?? string.Empty
+                }
+            };
         }
     }
 }

@@ -52,12 +52,16 @@ namespace liminal_api.Modules.User.Application.Service
             UserRegister userRegister = await _userRepositoryPort.findById(command.userId)
                 ?? throw new Exception($"User with id {command.userId} not found");
 
-            userRegister.changeUserName(command.userName);
-            userRegister.changeEmail(command.email);
+            if (!string.IsNullOrWhiteSpace(command.userName))
+                userRegister.changeUserName(command.userName);
 
-            if(command.imgProfile != null)
+            if (!string.IsNullOrWhiteSpace(command.email))
+                userRegister.changeEmail(command.email);
+
+            if (command.imgProfile != null)
             {
-                ImageCloudinary imageCloudinary = await _cloudinaryImageRepositoryPort.changeImageAsync(command.imgProfile, Guid.NewGuid().ToString(), userRegister.ImgProfile.PublicId);
+                string? oldPublicId = userRegister.ImgProfile?.PublicId;
+                ImageCloudinary imageCloudinary = await _cloudinaryImageRepositoryPort.changeImageAsync(command.imgProfile, Guid.NewGuid().ToString(), oldPublicId);
                 userRegister.changeImgProfile(imageCloudinary);
             }
 
