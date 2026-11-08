@@ -139,7 +139,6 @@ C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\obj\Debug\n
 C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\obj\Debug\net10.0\staticwebassets.development.json
 C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\obj\Debug\net10.0\staticwebassets.build.endpoints.json
 C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\obj\Debug\net10.0\swae.build.ex.cache
-C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\obj\Debug\net10.0\liminal_.7385257A.Up2Date
 C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\obj\Debug\net10.0\liminal_api.dll
 C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\obj\Debug\net10.0\refint\liminal_api.dll
@@ -159,3 +158,4 @@ C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\bin\Debug\n
 C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\bin\Debug\net10.0\Riok.Mapperly.Abstractions.dll
 C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

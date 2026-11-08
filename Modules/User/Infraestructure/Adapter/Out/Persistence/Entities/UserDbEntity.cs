@@ -5,7 +5,7 @@ namespace liminal_api.Modules.User.Infraestructure.Adapter.Out.Persistence.Entit
 {
     internal class UserDbEntity
     {
-        public string Id { get; set; }
+        public long Id { get; set; }
         public string? UserName { get; set; }
         public string? Email { get; set; }
         public string? Password { get; set; }
@@ -14,7 +14,7 @@ namespace liminal_api.Modules.User.Infraestructure.Adapter.Out.Persistence.Entit
         public DateTime CreatedAt { get; set; }
 
 
-        public UserDbEntity(string id, string? userName, string? email, string? password, string? imgProfileId, DateTime createdAt)
+        public UserDbEntity(long id, string? userName, string? email, string? password, string? imgProfileId, DateTime createdAt)
         {
             Id = id;
             UserName = userName;

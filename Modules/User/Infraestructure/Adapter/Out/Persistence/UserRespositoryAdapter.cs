@@ -16,7 +16,7 @@ namespace liminal_api.Modules.User.Infraestructure.Adapter.Out.Persistence
             _db = db;
         }
 
-        public async Task<UserRegister?> findById(string userId)
+        public async Task<UserRegister?> findById(long userId)
         {
             UserDbEntity? userDbEntity = await _db.Set<UserDbEntity>()
                 .AsNoTracking()

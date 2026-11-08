@@ -5,6 +5,6 @@ namespace liminal_api.Modules.User.Application.Port.In
 {
     public interface ILoginUserUseCase
     {
-        Task<UserRegister> loginUserUseCase(LoginCommand command);
+        Task<string> loginUserUseCase(LoginCommand command);
     }
 }

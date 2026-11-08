@@ -4,15 +4,15 @@ namespace liminal_api.Modules.User.Domain
 {
     public class UserRegister
     {
-        private string _id;
+        private long _id;
         private string? _userName;
         private string? _email;
         private string? _password;
-        private ImageCloudinary _imgProfile;
+        private ImageCloudinary? _imgProfile;
         private DateTime _createdAt;
 
 
-        public UserRegister(string? id, string? userName, string? email, string? password, ImageCloudinary imgProfile, DateTime createdAt)
+        public UserRegister(long id, string? userName, string? email, string? password, ImageCloudinary? imgProfile, DateTime createdAt)
         {
             _id = id;
             _userName = userName;
@@ -29,15 +29,12 @@ namespace liminal_api.Modules.User.Domain
         }
 
 
-        public string Id { get => _id; set => _id = value; }
+        public long Id { get => _id; set => _id = value; }
         public string? UserName { get => _userName; set => _userName = value; }
         public string? Email { get => _email; set => _email = value; }
         public string? Password { get => _password; set => _password = value; }
-        public ImageCloudinary ImgProfile { get => _imgProfile; set => _imgProfile = value; }
+        public ImageCloudinary? ImgProfile { get => _imgProfile; set => _imgProfile = value; }
         public DateTime CreatedAt { get => _createdAt; set => _createdAt = value; }
-
-       
-        public string? Token { get; set; }
 
         public void changeImgProfile(ImageCloudinary imgProfile)
         {

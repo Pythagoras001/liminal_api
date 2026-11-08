@@ -53,7 +53,7 @@ namespace liminal_api.Modules.User.Application.Service
             return await _userRepositoryPort.update(userRegister);
         }
 
-        public async Task<UserRegister> loginUserUseCase(LoginCommand command)
+        public async Task<string> loginUserUseCase(LoginCommand command)
         {
             UserRegister userRegister = await _userRepositoryPort.findByEmail(command.email)
                 ?? throw new UnauthorizedAccessException("Invalid email or password.");
@@ -64,9 +64,8 @@ namespace liminal_api.Modules.User.Application.Service
                 throw new UnauthorizedAccessException("Invalid email or password.");
 
             string token = _tokenServicePort.generateToken(userRegister);
-            userRegister.Token = token;
 
-            return userRegister;
+            return token;
         }
     }
 }

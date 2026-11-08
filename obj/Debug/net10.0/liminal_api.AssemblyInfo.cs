@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("liminal_api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+10de382f83e009d4d6cb252cc63d1b8a34e47f7d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+14753330819f50c4bb0984915a064f0c69103272")]
 [assembly: System.Reflection.AssemblyProductAttribute("liminal_api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("liminal_api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

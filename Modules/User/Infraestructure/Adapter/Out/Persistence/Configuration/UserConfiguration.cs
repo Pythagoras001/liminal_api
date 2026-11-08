@@ -14,7 +14,7 @@ namespace liminal_api.Modules.User.Infraestructure.Adapter.Out.Persistence.Confi
             builder.HasKey(u => u.Id);
 
             builder.Property(u => u.Id)
-                   .HasMaxLength(50);
+                   .ValueGeneratedOnAdd();
 
             builder.Property(u => u.UserName)
                    .IsRequired()

@@ -8,8 +8,24 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "command",
-        "Type": "liminal_api.Modules.User.Application.Command.LoginCommand",
+        "Name": "request",
+        "Type": "liminal_api.Modules.User.Infraestructure.Adapter.In.Rest.Dto.LoginRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "liminal_api.Modules.User.Infraestructure.Adapter.In.Rest.UserController",
+    "Method": "register",
+    "RelativePath": "User/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "liminal_api.Modules.User.Infraestructure.Adapter.In.Rest.Dto.RegisterRequestDto",
         "IsRequired": true
       }
     ],

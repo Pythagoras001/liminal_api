@@ -6,7 +6,7 @@ namespace liminal_api.Modules.User.Application.Port.Out
     {
         Task<UserRegister> save(UserRegister userRegister);
 
-        Task<UserRegister> findById(string userId);
+        Task<UserRegister> findById(long userId);
 
         Task<UserRegister?> findByEmail(string email);
 

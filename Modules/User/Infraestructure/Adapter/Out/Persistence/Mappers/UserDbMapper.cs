@@ -11,11 +11,12 @@ namespace liminal_api.Modules.User.Infraestructure.Adapter.Out.Persistence.Mappe
     [UseStaticMapper(typeof(ImageDbMapper))]
     internal static partial class UserDbMapper
     {
-        // ImgProfileId se llena solo desde ImgProfile.Id (Mapperly lo hace automático).
-        // La navegación se ignora para que EF no intente insertar la imagen otra vez.
+        // ImgProfileId se obtiene de forma segura cuando el usuario no tiene imagen.
+        [MapProperty("ImgProfile.Id", nameof(UserDbEntity.ImgProfileId))]
         [MapperIgnoreTarget(nameof(UserDbEntity.ImgProfile))]
         internal static partial UserDbEntity ToEntity(this UserRegister userRegister);
 
+        // La imagen es opcional, por lo que no se debe lanzar una excepción si falta.
         [MapperIgnoreSource(nameof(UserDbEntity.ImgProfileId))]
         internal static partial UserRegister ToDomain(this UserDbEntity userDbEntity);
 
