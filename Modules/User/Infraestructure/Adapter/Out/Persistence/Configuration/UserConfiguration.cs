@@ -24,7 +24,7 @@ namespace liminal_api.Modules.User.Infraestructure.Adapter.Out.Persistence.Confi
                    .IsRequired()
                    .HasMaxLength(UserDataPatters.EMAIL_MAX_LENGTH);
 
-            builder.Property(u => u.PasswordHash)
+            builder.Property(u => u.Password)
                    .IsRequired()
                    .HasMaxLength(255);
 

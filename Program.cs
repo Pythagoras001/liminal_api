@@ -1,9 +1,17 @@
+using System.Text;
 using CloudinaryDotNet;
 using liminal_api.Modules.Image.Application.Port.Out;
 using liminal_api.Modules.Image.Infraestructure.Adapter.Out.Cloudinary;
+using liminal_api.Modules.User.Application.Port.In;
+using liminal_api.Modules.User.Application.Port.Out;
+using liminal_api.Modules.User.Application.Service;
+using liminal_api.Modules.User.Infraestructure.Adapter.Out.Persistence;
+using liminal_api.Modules.User.Infraestructure.Adapter.Out.Security;
 using liminal_api.Shared.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +41,36 @@ builder.Services.AddScoped<ICloudinaryImageRepositoryPort, CloudinaryImageStorag
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("Default")));
 
+// JWT Authentication
+var jwtSettings = builder.Configuration.GetSection("Jwt");
+var jwtKey = Encoding.UTF8.GetBytes(jwtSettings["Key"]!);
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateIssuerSigningKey = true,
+            ValidateLifetime = true,
+            ValidIssuer = jwtSettings["Issuer"],
+            ValidAudience = jwtSettings["Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(jwtKey)
+        };
+    });
+
+builder.Services.AddAuthorization();
+
+// User module DI
+builder.Services.AddScoped<IPasswordHasherPort, BCryptPasswordHasherAdapter>();
+builder.Services.AddScoped<IUserRespositoryPort, UserRespositoryAdapter>();
+builder.Services.AddScoped<ITokenServicePort, JwtTokenServiceAdapter>();
+builder.Services.AddScoped<ILoginUserUseCase>(sp => sp.GetRequiredService<UserService>());
+builder.Services.AddScoped<IRegisterUserUseCase>(sp => sp.GetRequiredService<UserService>());
+builder.Services.AddScoped<IUpdateUserUseCase>(sp => sp.GetRequiredService<UserService>());
+builder.Services.AddScoped<UserService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -43,6 +81,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

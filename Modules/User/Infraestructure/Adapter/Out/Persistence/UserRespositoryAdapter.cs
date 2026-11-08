@@ -26,6 +26,16 @@ namespace liminal_api.Modules.User.Infraestructure.Adapter.Out.Persistence
             return userDbEntity?.ToDomain();
         }
 
+        public async Task<UserRegister?> findByEmail(string email)
+        {
+            UserDbEntity? userDbEntity = await _db.Set<UserDbEntity>()
+                .AsNoTracking()
+                .Include(u => u.ImgProfile)
+                .FirstOrDefaultAsync(u => u.Email == email);
+
+            return userDbEntity?.ToDomain();
+        }
+
         public async Task<UserRegister> save(UserRegister userRegister)
         {
             userRegister.initDefaults();

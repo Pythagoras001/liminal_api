@@ -37,6 +37,8 @@ namespace liminal_api.Modules.User.Domain
         public DateTime CreatedAt { get => _createdAt; set => _createdAt = value; }
 
        
+        public string? Token { get; set; }
+
         public void changeImgProfile(ImageCloudinary imgProfile)
         {
             ImgProfile = imgProfile;
