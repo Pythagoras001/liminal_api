@@ -36,6 +36,17 @@ namespace liminal_api.Modules.User.Application.Service
             return _userRepositoryPort.save(userRegister);
         }
 
+        public async Task<UserRegister> findUser(string id)
+        {
+            if (!long.TryParse(id, out long userId))
+                throw new ArgumentException("Invalid user id.");
+
+            UserRegister userRegister = await _userRepositoryPort.findById(userId)
+                ?? throw new KeyNotFoundException($"User with id {userId} not found.");
+
+            return userRegister;
+        }
+
         public async Task<UserRegister> updateUserUseCase(UpdateUserCommand command)
         {
             UserRegister userRegister = await _userRepositoryPort.findById(command.userId)

@@ -6,9 +6,6 @@
   },
   "servers": [
     {
-      "url": "https://localhost:7117"
-    },
-    {
       "url": "http://localhost:5276"
     }
   ],
@@ -70,6 +67,18 @@
           },
           "required": true
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/User/me": {
+      "get": {
+        "tags": [
+          "User"
+        ],
         "responses": {
           "200": {
             "description": "OK"
