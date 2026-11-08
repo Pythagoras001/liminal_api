@@ -35,5 +35,13 @@ namespace liminal_api.Modules.User.Infraestructure.Adapter.Out.Persistence
 
             return UserDbMapper.ToDomain(userDbEntity);
         }
+
+        public async Task<UserRegister> update(UserRegister userRegister)
+        {
+            UserDbEntity userDbEntity = UserDbMapper.ToEntity(userRegister);
+            _db.Set<UserDbEntity>().Update(userDbEntity);
+            await _db.SaveChangesAsync();
+            return UserDbMapper.ToDomain(userDbEntity);
+        }
     }
 }

@@ -8,5 +8,7 @@ namespace liminal_api.Modules.User.Application.Port.Out
 
         Task<UserRegister> findById(string userId);
 
+        Task<UserRegister> update(UserRegister userRegister);
+
     }
 }

@@ -5,6 +5,10 @@ namespace liminal_api.Modules.Image.Application.Port.Out
     public interface ICloudinaryImageRepositoryPort
     {
         Task<ImageCloudinary> UploadAsync(Stream file, string fileName);
+
+        Task<ImageCloudinary> changeImageAsync(Stream file, string newFileName, string? oldPublicId);
+
+        Task deleteImage(string publicId);
     }
 
 }

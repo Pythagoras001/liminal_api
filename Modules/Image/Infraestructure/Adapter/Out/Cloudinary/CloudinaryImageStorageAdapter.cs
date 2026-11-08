@@ -14,6 +14,29 @@ namespace liminal_api.Modules.Image.Infraestructure.Adapter.Out.Cloudinary
             _cloudinary = cloudinary;
         }
 
+        public async Task<ImageCloudinary> changeImageAsync(Stream file, string fileName, string? publicId)
+        {
+            if (publicId != null)
+            {
+                var deleteResult = await _cloudinary.DestroyAsync(new DeletionParams(publicId));
+                if (deleteResult.Error != null)
+                    throw new InvalidOperationException($"Cloudinary delete failed: {deleteResult.Error.Message}");
+            }
+
+            return await UploadAsync(file, fileName);
+        }
+
+        public async Task deleteImage(string publicId)
+        {
+            var result = await _cloudinary.DestroyAsync(new DeletionParams(publicId));
+
+            if (result.Result == "not found")
+                throw new KeyNotFoundException($"Image with public id '{publicId}' not found in Cloudinary.");
+
+            if (result.Error != null)
+                throw new InvalidOperationException($"Cloudinary delete failed: {result.Error.Message}");
+        }
+
         public async Task<ImageCloudinary> UploadAsync(Stream file, string fileName)
         {
             var uploadParams = new ImageUploadParams
