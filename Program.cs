@@ -2,6 +2,10 @@ using System.Text;
 using CloudinaryDotNet;
 using liminal_api.Modules.Image.Application.Port.Out;
 using liminal_api.Modules.Image.Infraestructure.Adapter.Out.Cloudinary;
+using liminal_api.Modules.LevelClass.Application.Port.In;
+using liminal_api.Modules.LevelClass.Application.Port.Out;
+using liminal_api.Modules.LevelClass.Application.Service;
+using liminal_api.Modules.LevelClass.Infraestructure.Adapter.Out.Persistence;
 using liminal_api.Modules.User.Application.Port.In;
 using liminal_api.Modules.User.Application.Port.Out;
 using liminal_api.Modules.User.Application.Service;
@@ -70,6 +74,10 @@ builder.Services.AddScoped<ILoginUserUseCase>(sp => sp.GetRequiredService<UserSe
 builder.Services.AddScoped<IRegisterUserUseCase>(sp => sp.GetRequiredService<UserService>());
 builder.Services.AddScoped<IUpdateUserUseCase>(sp => sp.GetRequiredService<UserService>());
 builder.Services.AddScoped<UserService>();
+
+// Level class module DI
+builder.Services.AddScoped<ILevelClassRepositoryPort, LevelClassRepositoryAdapter>();
+builder.Services.AddScoped<ILevelClassUseCase, LevelClassService>();
 
 var app = builder.Build();
 
