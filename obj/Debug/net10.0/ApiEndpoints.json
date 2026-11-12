@@ -1,5 +1,370 @@
 [
   {
+    "ContainingType": "liminal_api.Modules.LevelClass.Infraestructure.Adapter.In.Rest.LevelClassController",
+    "Method": "FindAll",
+    "RelativePath": "class",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IReadOnlyList\u00601[[liminal_api.Modules.LevelClass.Infraestructure.Adapter.In.Rest.Dto.LevelClassResponseDto, liminal_api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "liminal_api.Modules.LevelClass.Infraestructure.Adapter.In.Rest.LevelClassController",
+    "Method": "Create",
+    "RelativePath": "class",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Type",
+        "Type": "System.Nullable\u00601[[liminal_api.Modules.LevelClass.Domain.Enums.SurvivalClassType, liminal_api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "ClassNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SecurityLevel",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Legitimacy",
+        "Type": "System.Nullable\u00601[[liminal_api.Modules.LevelClass.Domain.Enums.Legitimacy, liminal_api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "DangerLevel",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Icon",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "liminal_api.Modules.LevelClass.Infraestructure.Adapter.In.Rest.Dto.LevelClassResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "liminal_api.Modules.LevelClass.Infraestructure.Adapter.In.Rest.LevelClassController",
+    "Method": "Update",
+    "RelativePath": "class/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "Type",
+        "Type": "System.Nullable\u00601[[liminal_api.Modules.LevelClass.Domain.Enums.SurvivalClassType, liminal_api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "ClassNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SecurityLevel",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Legitimacy",
+        "Type": "System.Nullable\u00601[[liminal_api.Modules.LevelClass.Domain.Enums.Legitimacy, liminal_api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "DangerLevel",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Icon",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "liminal_api.Modules.LevelClass.Infraestructure.Adapter.In.Rest.Dto.LevelClassResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest.ReportController",
+    "Method": "FindAll",
+    "RelativePath": "report",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Page",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest.Dto.PaginatedResponseDto\u00601[[liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest.Dto.ReportDetailResponseDto, liminal_api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest.ReportController",
+    "Method": "Create",
+    "RelativePath": "report",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Nivel",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "LevelClassId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PrincipalEvidenceDescription",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "galeryEvidencesDescriptions",
+        "Type": "System.String[]",
+        "IsRequired": false
+      },
+      {
+        "Name": "PrincipalEvidence",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "galeryEvidences",
+        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=10.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest.Dto.ReportResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest.ReportController",
+    "Method": "Rate",
+    "RelativePath": "report",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest.Dto.RateReportRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest.Dto.ReportResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest.ReportController",
+    "Method": "FindById",
+    "RelativePath": "report/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest.Dto.ReportDetailResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest.ReportController",
+    "Method": "Update",
+    "RelativePath": "report/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest.Dto.UpdateReportRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest.Dto.ReportResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest.ReportController",
+    "Method": "Delete",
+    "RelativePath": "report/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest.ReportController",
+    "Method": "FindByAuthor",
+    "RelativePath": "report/me",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Page",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest.Dto.PaginatedResponseDto\u00601[[liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest.Dto.ReportDetailResponseDto, liminal_api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "liminal_api.Modules.User.Infraestructure.Adapter.In.Rest.UserController",
+    "Method": "register",
+    "RelativePath": "User",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "liminal_api.Modules.User.Infraestructure.Adapter.In.Rest.Dto.RegisterRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "liminal_api.Modules.User.Infraestructure.Adapter.In.Rest.UserController",
     "Method": "login",
     "RelativePath": "User/login",
@@ -27,6 +392,37 @@
   },
   {
     "ContainingType": "liminal_api.Modules.User.Infraestructure.Adapter.In.Rest.UserController",
+    "Method": "updateCurrentUser",
+    "RelativePath": "User/me",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "avatar",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "imgProfile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "liminal_api.Modules.User.Infraestructure.Adapter.In.Rest.UserController",
     "Method": "register",
     "RelativePath": "User/register",
     "HttpMethod": "POST",
@@ -37,6 +433,37 @@
         "Name": "request",
         "Type": "liminal_api.Modules.User.Infraestructure.Adapter.In.Rest.Dto.RegisterRequestDto",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "liminal_api.Modules.User.Infraestructure.Adapter.In.Rest.UserController",
+    "Method": "updateCurrentUser",
+    "RelativePath": "User/update",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "avatar",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "imgProfile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

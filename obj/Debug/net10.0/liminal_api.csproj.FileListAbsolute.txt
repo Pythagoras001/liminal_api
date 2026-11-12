@@ -157,3 +157,5 @@ C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\bin\Debug\n
 C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\bin\Debug\net10.0\Riok.Mapperly.Abstractions.dll
 C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\bin\Debug\net10.0\liminal_api.exe
+C:\Users\thoma\Desktop\Universidad2026_2\PPE\liminal_api\liminal_api\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

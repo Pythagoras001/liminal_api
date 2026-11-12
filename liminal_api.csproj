@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <Folder Include="Modules\Image\Infraestructure\Adapter\In\" />
+    <Folder Include="Modules\Report\" />
     <Folder Include="Modules\User\Infraestructure\Adapter\Out\Persistence\Configuration\" />
   </ItemGroup>
 

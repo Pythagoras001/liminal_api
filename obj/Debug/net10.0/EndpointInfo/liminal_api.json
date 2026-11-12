@@ -74,6 +74,38 @@
         }
       }
     },
+    "/User": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/User/me": {
       "get": {
         "tags": [
@@ -82,6 +114,593 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userName": {
+                    "maxLength": 20,
+                    "minLength": 3,
+                    "pattern": "^[a-zA-Z0-9_]+$",
+                    "type": "string"
+                  },
+                  "email": {
+                    "maxLength": 255,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "avatar": {
+                    "$ref": "#/components/schemas/IFormFile"
+                  },
+                  "imgProfile": {
+                    "$ref": "#/components/schemas/IFormFile"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/User/update": {
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userName": {
+                    "maxLength": 20,
+                    "minLength": 3,
+                    "pattern": "^[a-zA-Z0-9_]+$",
+                    "type": "string"
+                  },
+                  "email": {
+                    "maxLength": 255,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "avatar": {
+                    "$ref": "#/components/schemas/IFormFile"
+                  },
+                  "imgProfile": {
+                    "$ref": "#/components/schemas/IFormFile"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/report": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResponseDtoOfReportDetailResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResponseDtoOfReportDetailResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResponseDtoOfReportDetailResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Report"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Title": {
+                    "type": "string"
+                  },
+                  "Nivel": {
+                    "type": "string"
+                  },
+                  "LevelClassId": {
+                    "maximum": 2147483647,
+                    "minimum": 1,
+                    "pattern": "^-?(?:0|[1-9]\\d*)$",
+                    "type": [
+                      "integer",
+                      "string"
+                    ],
+                    "format": "int32"
+                  },
+                  "Description": {
+                    "type": "string"
+                  },
+                  "PrincipalEvidenceDescription": {
+                    "type": "string"
+                  },
+                  "galeryEvidencesDescriptions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "PrincipalEvidence": {
+                    "$ref": "#/components/schemas/IFormFile"
+                  },
+                  "galeryEvidences": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/IFormFile"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Report"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RateReportRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RateReportRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RateReportRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/report/me": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResponseDtoOfReportDetailResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResponseDtoOfReportDetailResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResponseDtoOfReportDetailResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/report/{id}": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportDetailResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportDetailResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportDetailResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Report"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateReportRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateReportRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateReportRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Report"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/class": {
+      "get": {
+        "tags": [
+          "LevelClass"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LevelClassResponseDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LevelClassResponseDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LevelClassResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "LevelClass"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Type": {
+                    "$ref": "#/components/schemas/SurvivalClassType"
+                  },
+                  "ClassNumber": {
+                    "type": "string"
+                  },
+                  "SecurityLevel": {
+                    "type": "string"
+                  },
+                  "Legitimacy": {
+                    "$ref": "#/components/schemas/Legitimacy"
+                  },
+                  "DangerLevel": {
+                    "type": "string"
+                  },
+                  "Description": {
+                    "type": "string"
+                  },
+                  "Icon": {
+                    "$ref": "#/components/schemas/IFormFile"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LevelClassResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LevelClassResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LevelClassResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/class/{id}": {
+      "patch": {
+        "tags": [
+          "LevelClass"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Type": {
+                    "$ref": "#/components/schemas/SurvivalClassType"
+                  },
+                  "ClassNumber": {
+                    "type": "string"
+                  },
+                  "SecurityLevel": {
+                    "type": "string"
+                  },
+                  "Legitimacy": {
+                    "$ref": "#/components/schemas/Legitimacy"
+                  },
+                  "DangerLevel": {
+                    "type": "string"
+                  },
+                  "Description": {
+                    "type": "string"
+                  },
+                  "Icon": {
+                    "$ref": "#/components/schemas/IFormFile"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LevelClassResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LevelClassResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LevelClassResponseDto"
+                }
+              }
+            }
           }
         }
       }
@@ -128,6 +747,101 @@
   },
   "components": {
     "schemas": {
+      "AuthorResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "userName": {
+            "type": "string"
+          },
+          "profileImage": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EvidenceImageResponseDto"
+              }
+            ]
+          }
+        }
+      },
+      "EvidenceImageResponseDto": {
+        "type": "object",
+        "properties": {
+          "thumbnailUrl": {
+            "type": "string"
+          },
+          "mediumUrl": {
+            "type": "string"
+          },
+          "originalUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "EvidenceResponseDto": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "image": {
+            "$ref": "#/components/schemas/EvidenceImageResponseDto"
+          }
+        }
+      },
+      "IFormFile": {
+        "type": "string",
+        "format": "binary"
+      },
+      "Legitimacy": {
+        "enum": [
+          "VERIFIED",
+          "UNVERIFIED",
+          "DISPUTED",
+          null
+        ]
+      },
+      "LevelClassResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "type": {
+            "type": "string"
+          },
+          "classNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "securityLevel": {
+            "type": "string"
+          },
+          "legitimacy": {
+            "type": "string"
+          },
+          "dangerLevel": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "iconImage": {
+            "$ref": "#/components/schemas/EvidenceImageResponseDto"
+          }
+        }
+      },
       "LoginRequestDto": {
         "required": [
           "password",
@@ -143,6 +857,80 @@
           }
         }
       },
+      "PaginatedResponseDtoOfReportDetailResponseDto": {
+        "required": [
+          "data",
+          "page",
+          "pageSize",
+          "total",
+          "totalPages"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReportDetailResponseDto"
+            }
+          },
+          "page": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "pageSize": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "total": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "totalPages": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "RateReportRequestDto": {
+        "required": [
+          "liked"
+        ],
+        "type": "object",
+        "properties": {
+          "reportId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "liked": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          }
+        }
+      },
       "RegisterRequestDto": {
         "required": [
           "userName",
@@ -153,13 +941,172 @@
         "properties": {
           "userName": {
             "maxLength": 20,
+            "minLength": 3,
+            "pattern": "^[a-zA-Z0-9_]+$",
             "type": "string"
           },
           "email": {
+            "maxLength": 255,
             "type": "string"
           },
           "password": {
+            "maxLength": 72,
+            "minLength": 8,
             "type": "string"
+          }
+        }
+      },
+      "ReportDetailResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "title": {
+            "type": "string"
+          },
+          "nivel": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "likesCount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "principalEvidence": {
+            "$ref": "#/components/schemas/EvidenceResponseDto"
+          },
+          "galeryEvidences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvidenceResponseDto"
+            }
+          },
+          "author": {
+            "$ref": "#/components/schemas/AuthorResponseDto"
+          },
+          "levelClass": {
+            "$ref": "#/components/schemas/LevelClassResponseDto"
+          }
+        }
+      },
+      "ReportResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "authorId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "nivel": {
+            "type": "string"
+          },
+          "levelClassId": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "description": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "principalEvidence": {
+            "$ref": "#/components/schemas/EvidenceResponseDto"
+          },
+          "galeryEvidences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvidenceResponseDto"
+            }
+          },
+          "likesCount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "SurvivalClassType": {
+        "enum": [
+          "STANDARD",
+          "ENVIRONMENTAL",
+          "PSYCHOLOGICAL",
+          "COMBINATION",
+          "UTOPIAN",
+          "DYSTOPIAN",
+          "UNCLASSIFIED",
+          "CHANGING",
+          "OTHER",
+          null
+        ]
+      },
+      "UpdateReportRequestDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "minLength": 1,
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "nivel": {
+            "minLength": 1,
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "levelClassId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "description": {
+            "minLength": 1,
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -199,6 +1146,12 @@
   "tags": [
     {
       "name": "User"
+    },
+    {
+      "name": "Report"
+    },
+    {
+      "name": "LevelClass"
     },
     {
       "name": "WeatherForecast"
