@@ -6,6 +6,9 @@ using liminal_api.Modules.LevelClass.Application.Port.In;
 using liminal_api.Modules.LevelClass.Application.Port.Out;
 using liminal_api.Modules.LevelClass.Application.Service;
 using liminal_api.Modules.LevelClass.Infraestructure.Adapter.Out.Persistence;
+using liminal_api.Modules.Report.Application.Port.Out;
+using liminal_api.Modules.Report.Application.Service;
+using liminal_api.Modules.Report.Infraestructure.Adapter.Out.Persistence;
 using liminal_api.Modules.User.Application.Port.In;
 using liminal_api.Modules.User.Application.Port.Out;
 using liminal_api.Modules.User.Application.Service;
@@ -79,6 +82,11 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<ILevelClassRepositoryPort, LevelClassRepositoryAdapter>();
 builder.Services.AddScoped<ILevelClassUseCase, LevelClassService>();
 
+// Report module DI
+builder.Services.AddScoped<IReportRepositoryPort, ReportRepositoryAdapter>();
+builder.Services.AddScoped<ReportService>();
+builder.Services.AddScoped<ReportQueryService>();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -86,6 +94,7 @@ if (app.Environment.IsDevelopment())
     using IServiceScope scope = app.Services.CreateScope();
     AppDbContext db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.EnsureCreated();
+    db.Database.Migrate();
 }
 
 // Configure the HTTP request pipeline.
