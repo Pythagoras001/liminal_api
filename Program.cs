@@ -26,6 +26,21 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddHttpLogging(options =>
+{
+    options.LoggingFields =
+        Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.RequestMethod |
+        Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.RequestPath |
+        Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.ResponseStatusCode;
+});
+builder.Logging.AddFilter(
+    "Microsoft.AspNetCore.HttpLogging.HttpLoggingMiddleware",
+    LogLevel.Information);
+builder.Services.AddCors(options => options.AddPolicy("Frontend", policy =>
+    policy
+        .WithOrigins("http://localhost:5173", "http://127.0.0.1:5173")
+        .AllowAnyHeader()
+        .AllowAnyMethod()));
 
 // Lee la sección "Cloudinary" y valida al arrancar (como los throw de constants.ts)
 builder.Services.AddOptions<CloudinaryOptions>()
@@ -105,6 +120,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseHttpLogging();
+app.UseCors("Frontend");
 app.UseAuthentication();
 app.UseAuthorization();
 

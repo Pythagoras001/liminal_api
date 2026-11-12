@@ -61,8 +61,16 @@ namespace liminal_api.Modules.User.Application.Service
             if (command.imgProfile != null)
             {
                 string? oldPublicId = userRegister.ImgProfile?.PublicId;
-                ImageCloudinary imageCloudinary = await _cloudinaryImageRepositoryPort.changeImageAsync(command.imgProfile, Guid.NewGuid().ToString(), oldPublicId);
+                ImageCloudinary imageCloudinary = await _cloudinaryImageRepositoryPort.UploadAsync(
+                    command.imgProfile,
+                    Guid.NewGuid().ToString());
                 userRegister.changeImgProfile(imageCloudinary);
+
+                UserRegister updatedUser = await _userRepositoryPort.update(userRegister);
+                if (!string.IsNullOrEmpty(oldPublicId))
+                    await _cloudinaryImageRepositoryPort.deleteImage(oldPublicId);
+
+                return updatedUser;
             }
 
             return await _userRepositoryPort.update(userRegister);
