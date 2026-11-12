@@ -1,4 +1,6 @@
-﻿namespace liminal_api.Modules.User.Infraestructure.Adapter.In.Rest.Dto
+﻿using System.Text.Json.Serialization;
+
+namespace liminal_api.Modules.User.Infraestructure.Adapter.In.Rest.Dto
 {
     public class UserRegisterResponseDto
     {
@@ -6,6 +8,7 @@
         public string userName { get; set; } = default!;
         public string email { get; set; } = default!;
         public DateTime createdAt { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ProfileImageResponseDto? profileImage { get; set; }
 
         public class ProfileImageResponseDto

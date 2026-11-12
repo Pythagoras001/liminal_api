@@ -42,6 +42,7 @@ namespace liminal_api.Modules.User.Infraestructure.Adapter.In.Rest
         }
 
         [AllowAnonymous]
+        [HttpPost]
         [HttpPost("register")]
         public async Task<IActionResult> register([FromBody] RegisterRequestDto request)
         {
@@ -50,7 +51,7 @@ namespace liminal_api.Modules.User.Infraestructure.Adapter.In.Rest
                 var command = new RegisterUserCommand(request.userName, request.email, request.password);
                 var userRegister = await _registerUserUseCase.registerUserUseCase(command);
 
-                return Ok(new UserRegisterResponseDto
+                return StatusCode(StatusCodes.Status201Created, new UserRegisterResponseDto
                 {
                     id = userRegister.Id.ToString(),
                     userName = userRegister.UserName ?? string.Empty,
@@ -97,6 +98,7 @@ namespace liminal_api.Modules.User.Infraestructure.Adapter.In.Rest
         }
 
         [Authorize]
+        [HttpPatch("update")]
         [HttpPut("me")]
         public async Task<IActionResult> updateCurrentUser([FromForm] UpdateUserRequestDto request)
         {
@@ -110,7 +112,8 @@ namespace liminal_api.Modules.User.Infraestructure.Adapter.In.Rest
             try
             {
                 var userId = long.Parse(userIdClaim);
-                using var imageStream = request.imgProfile != null ? request.imgProfile.OpenReadStream() : null;
+                var avatar = request.avatar ?? request.imgProfile;
+                using var imageStream = avatar != null ? avatar.OpenReadStream() : null;
 
                 var command = new UpdateUserCommand(
                     userId,
