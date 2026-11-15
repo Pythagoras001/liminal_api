@@ -1,4 +1,5 @@
 using liminal_api.Modules.LevelClass.Application.Port.In;
+using liminal_api.Modules.Report.Application.Port.In;
 using liminal_api.Modules.Report.Application.Port.Out;
 using liminal_api.Modules.Report.Application.ReadModel;
 using liminal_api.Modules.User.Application.Service;
@@ -6,7 +7,7 @@ using ReportEntity = liminal_api.Modules.Report.Domain.Report;
 
 namespace liminal_api.Modules.Report.Application.Service
 {
-    public class ReportQueryService
+    public class ReportQueryService : IReportQueryUseCase
     {
         private const int ReportsPageSize = 9;
         private readonly IReportRepositoryPort _repository;

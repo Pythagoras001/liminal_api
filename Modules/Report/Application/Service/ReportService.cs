@@ -2,13 +2,14 @@ using liminal_api.Modules.Image.Application.Port.Out;
 using liminal_api.Modules.Image.Domain;
 using liminal_api.Modules.LevelClass.Application.Port.In;
 using liminal_api.Modules.Report.Application.Command;
+using liminal_api.Modules.Report.Application.Port.In;
 using liminal_api.Modules.Report.Application.Port.Out;
 using liminal_api.Modules.Report.Domain;
 using ReportEntity = liminal_api.Modules.Report.Domain.Report;
 
 namespace liminal_api.Modules.Report.Application.Service
 {
-    public class ReportService
+    public class ReportService : IReportUseCase
     {
         private readonly IReportRepositoryPort _repository;
         private readonly ICloudinaryImageRepositoryPort _imageRepository;

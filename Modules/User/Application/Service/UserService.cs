@@ -7,7 +7,7 @@ using liminal_api.Modules.User.Domain;
 
 namespace liminal_api.Modules.User.Application.Service
 {
-    public class UserService : IRegisterUserUseCase, IUpdateUserUseCase, ILoginUserUseCase
+    public class UserService : IRegisterUserUseCase, IUpdateUserUseCase, ILoginUserUseCase, IFindUserUseCase
     {
         private readonly IUserRespositoryPort _userRepositoryPort;
         private readonly ICloudinaryImageRepositoryPort _cloudinaryImageRepositoryPort;

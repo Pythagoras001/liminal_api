@@ -6,6 +6,7 @@ using liminal_api.Modules.LevelClass.Application.Port.In;
 using liminal_api.Modules.LevelClass.Application.Port.Out;
 using liminal_api.Modules.LevelClass.Application.Service;
 using liminal_api.Modules.LevelClass.Infraestructure.Adapter.Out.Persistence;
+using liminal_api.Modules.Report.Application.Port.In;
 using liminal_api.Modules.Report.Application.Port.Out;
 using liminal_api.Modules.Report.Application.Service;
 using liminal_api.Modules.Report.Infraestructure.Adapter.Out.Persistence;
@@ -91,6 +92,7 @@ builder.Services.AddScoped<ITokenServicePort, JwtTokenServiceAdapter>();
 builder.Services.AddScoped<ILoginUserUseCase>(sp => sp.GetRequiredService<UserService>());
 builder.Services.AddScoped<IRegisterUserUseCase>(sp => sp.GetRequiredService<UserService>());
 builder.Services.AddScoped<IUpdateUserUseCase>(sp => sp.GetRequiredService<UserService>());
+builder.Services.AddScoped<IFindUserUseCase>(sp => sp.GetRequiredService<UserService>());
 builder.Services.AddScoped<UserService>();
 
 // Level class module DI
@@ -99,8 +101,8 @@ builder.Services.AddScoped<ILevelClassUseCase, LevelClassService>();
 
 // Report module DI
 builder.Services.AddScoped<IReportRepositoryPort, ReportRepositoryAdapter>();
-builder.Services.AddScoped<ReportService>();
-builder.Services.AddScoped<ReportQueryService>();
+builder.Services.AddScoped<IReportUseCase, ReportService>();
+builder.Services.AddScoped<IReportQueryUseCase, ReportQueryService>();
 
 var app = builder.Build();
 

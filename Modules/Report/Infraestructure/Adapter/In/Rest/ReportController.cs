@@ -1,7 +1,7 @@
 using System.Security.Claims;
 using liminal_api.Modules.Report.Application.Command;
+using liminal_api.Modules.Report.Application.Port.In;
 using liminal_api.Modules.Report.Application.ReadModel;
-using liminal_api.Modules.Report.Application.Service;
 using liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,15 +13,15 @@ namespace liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest
     [Route("report")]
     public class ReportController : ControllerBase
     {
-        private readonly ReportService _reportService;
-        private readonly ReportQueryService _reportQueryService;
+        private readonly IReportUseCase _reportUseCase;
+        private readonly IReportQueryUseCase _reportQueryUseCase;
 
         public ReportController(
-            ReportService reportService,
-            ReportQueryService reportQueryService)
+            IReportUseCase reportUseCase,
+            IReportQueryUseCase reportQueryUseCase)
         {
-            _reportService = reportService;
-            _reportQueryService = reportQueryService;
+            _reportUseCase = reportUseCase;
+            _reportQueryUseCase = reportQueryUseCase;
         }
 
         [AllowAnonymous]
@@ -29,7 +29,7 @@ namespace liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest
         public async Task<ActionResult<PaginatedResponseDto<ReportDetailResponseDto>>> FindAll(
             [FromQuery] FindAllReportsQueryDto query)
         {
-            var result = await _reportQueryService.FindAll(query.Page ?? 1);
+            var result = await _reportQueryUseCase.FindAll(query.Page ?? 1);
             return Ok(ToResponse(result));
         }
 
@@ -44,7 +44,7 @@ namespace liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest
 
             try
             {
-                var result = await _reportQueryService.FindByAuthor(userId, query.Page ?? 1);
+                var result = await _reportQueryUseCase.FindByAuthor(userId, query.Page ?? 1);
                 return Ok(ToResponse(result));
             }
             catch (KeyNotFoundException)
@@ -60,7 +60,7 @@ namespace liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest
             try
             {
                 return Ok(ReportDetailResponseDto.FromReadModel(
-                    await _reportQueryService.FindById(id)));
+                    await _reportQueryUseCase.FindById(id)));
             }
             catch (KeyNotFoundException)
             {
@@ -97,7 +97,7 @@ namespace liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest
                     request.GaleryEvidencesDescriptions ?? Array.Empty<string>(),
                     galleryStreams);
 
-                ReportEntity report = await _reportService.Create(command);
+                ReportEntity report = await _reportUseCase.Create(command);
                 return StatusCode(
                     StatusCodes.Status201Created,
                     ReportResponseDto.FromDomain(report));
@@ -128,7 +128,7 @@ namespace liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest
 
             try
             {
-                ReportEntity report = await _reportService.Rate(
+                ReportEntity report = await _reportUseCase.Rate(
                     request.ReportId, userId, request.Liked!.Value);
                 return Ok(ReportResponseDto.FromDomain(report));
             }
@@ -153,7 +153,7 @@ namespace liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest
                 var command = new UpdateReportCommand(
                     id, userId, request.Title, request.Nivel,
                     request.LevelClassId, request.Description);
-                ReportEntity report = await _reportService.Update(command);
+                ReportEntity report = await _reportUseCase.Update(command);
                 return Ok(ReportResponseDto.FromDomain(report));
             }
             catch (KeyNotFoundException ex)
@@ -176,7 +176,7 @@ namespace liminal_api.Modules.Report.Infraestructure.Adapter.In.Rest
 
             try
             {
-                await _reportService.Delete(id, userId);
+                await _reportUseCase.Delete(id, userId);
                 return NoContent();
             }
             catch (KeyNotFoundException ex)

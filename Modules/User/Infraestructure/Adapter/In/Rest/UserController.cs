@@ -1,7 +1,6 @@
 using System.Security.Claims;
 using liminal_api.Modules.User.Application.Command;
 using liminal_api.Modules.User.Application.Port.In;
-using liminal_api.Modules.User.Application.Service;
 using liminal_api.Modules.User.Infraestructure.Adapter.In.Rest.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,14 +14,14 @@ namespace liminal_api.Modules.User.Infraestructure.Adapter.In.Rest
         private readonly ILoginUserUseCase _loginUserUseCase;
         private readonly IRegisterUserUseCase _registerUserUseCase;
         private readonly IUpdateUserUseCase _updateUserUseCase;
-        private readonly UserService _userService;
+        private readonly IFindUserUseCase _findUserUseCase;
 
-        public UserController(ILoginUserUseCase loginUserUseCase, IRegisterUserUseCase registerUserUseCase, IUpdateUserUseCase updateUserUseCase, UserService userService)
+        public UserController(ILoginUserUseCase loginUserUseCase, IRegisterUserUseCase registerUserUseCase, IUpdateUserUseCase updateUserUseCase, IFindUserUseCase findUserUseCase)
         {
             _loginUserUseCase = loginUserUseCase;
             _registerUserUseCase = registerUserUseCase;
             _updateUserUseCase = updateUserUseCase;
-            _userService = userService;
+            _findUserUseCase = findUserUseCase;
         }
 
         [AllowAnonymous]
@@ -84,7 +83,7 @@ namespace liminal_api.Modules.User.Infraestructure.Adapter.In.Rest
 
             try
             {
-                var userRegister = await _userService.findUser(userIdClaim);
+                var userRegister = await _findUserUseCase.findUser(userIdClaim);
                 return Ok(MapToResponse(userRegister));
             }
             catch (ArgumentException)
